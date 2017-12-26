@@ -1,0 +1,33 @@
+#!/usr/bin/env node
+
+let path = require('path')
+let program = require('commander')
+let puppeteer = require('puppeteer')
+
+let capteer = async (url, path, height, width, delay, fullPage) => {
+  let browser = await puppeteer.launch()
+  let page = await browser.newPage()
+  page.setViewport({ height, width })
+  await page.goto(url)
+  await page.waitFor(delay)
+  await page.screenshot({ path, fullPage })
+  await browser.close()
+}
+
+program
+  .version(require('../package').version)
+  .usage('<url> [filename] [options]')
+  .option('-H, --height <height>', 'set viewport height')
+  .option('-W, --width <width>', 'set viewport width')
+  .option('-D, --delay <delay>', 'milliseconds before capture')
+  .option('-V, --viewport', 'only capture the viewport')
+  .arguments('<url> [filename]')
+  .action(function(url, filename, options) {
+    let file = path.resolve(process.cwd(), filename || 'screenshot.png')
+    let height = Number.parseInt(options.height, 10) || 800
+    let width = Number.parseInt(options.width, 10) || 1000
+    let delay = Number.parseInt(options.delay, 10) || 1000
+    let fullPage = !options.viewport
+    capteer(url, file, height, width, delay, fullPage)
+  })
+  .parse(process.argv)

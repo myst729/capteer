@@ -1,0 +1,36 @@
+{
+  "name": "capteer",
+  "version": "0.5.0",
+  "description": "Capture web page with puppeteer.",
+  "main": "./bin/capteer",
+  "dependencies": {
+    "commander": "^2.12.2",
+    "puppeteer": "^0.13.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/myst729/capteer.git"
+  },
+  "keywords": [
+    "capture",
+    "puppeteer"
+  ],
+  "author": {
+    "name": "Leo Deng"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/myst729/capteer/issues"
+  },
+  "homepage": "https://github.com/myst729/capteer",
+  "bin": {
+    "capteer": "./bin/capteer"
+  },
+  "directories": {
+    "bin": "./bin"
+  }
+}
