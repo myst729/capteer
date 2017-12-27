@@ -4,13 +4,13 @@ let path = require('path')
 let commander = require('commander')
 let puppeteer = require('puppeteer')
 
-let capture = async (url, path, height, width, delay, fullPage) => {
+let capture = async (url, delay, viewport, config) => {
   let browser = await puppeteer.launch()
   let page = await browser.newPage()
-  page.setViewport({ height, width })
+  page.setViewport(viewport)
   await page.goto(url)
   await page.waitFor(delay)
-  await page.screenshot({ path, fullPage })
+  await page.screenshot(config)
   await browser.close()
 }
 
@@ -23,11 +23,13 @@ commander
   .option('-R, --region', 'only capture the viewport, omit to capture full page')
   .arguments('<url> [filename]')
   .action((url, filename, options) => {
-    let file = path.resolve(process.cwd(), filename || 'screenshot.png')
+    let name = filename || 'screenshot'
+    let suffix = /\.png$/i.test(name) ? '' : '.png'
+    let filePath = path.resolve(process.cwd(), name + suffix)
     let height = Number.parseInt(options.height, 10) || 800
     let width = Number.parseInt(options.width, 10) || 1000
     let delay = Number.parseInt(options.delay, 10) || 1000
     let fullPage = !options.region
-    capture(url, file, height, width, delay, fullPage)
+    capture(url, delay, { width, height }, { path: filePath, fullPage })
   })
   .parse(process.argv)

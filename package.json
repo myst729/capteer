@@ -1,6 +1,6 @@
 {
   "name": "capteer",
-  "version": "0.5.4",
+  "version": "0.5.5",
   "description": "Capture web page with puppeteer.",
   "license": "MIT",
   "author": {
