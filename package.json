@@ -1,6 +1,6 @@
 {
   "name": "capteer",
-  "version": "0.6.0",
+  "version": "0.6.2",
   "description": "Capture web page with puppeteer.",
   "license": "MIT",
   "author": {
@@ -14,8 +14,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "commander": "^2.15.1",
-    "puppeteer": "^1.3.0"
+    "commander": "^2.20.0",
+    "puppeteer": "^1.17.0"
   },
   "devDependencies": {},
   "main": "./bin/capteer",
